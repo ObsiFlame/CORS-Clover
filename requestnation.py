@@ -2,24 +2,35 @@
 
 import requests as req
 import sys
-import json 
+import os
+import json
+from Banner.info import banner
+# Banner of the Project 
 
-print("Finding CORS Bugs \n\n")
+banner()
 
 # make add the sites to the list
 
 class Websites:
     
-    def __init__(self, domain , headers):
+    def __init__(self, domain , headers, json_filename):
         self.domain = domain
         self.headers = headers
+        self.json_filename = json_filename
     
     def DumpWebsites_json(self):
        # print(f"{self.domain} -> domain \n\n ")
        # print(f"{self.headers} -> header \n\n ")
-        with open("domain.json", 'w') as file:
+        with open(f"{self.json_filename}", 'w') as file:
             json.dump(dict(self.headers), file)
+            file.close()
 
+    def beautify_json(self):
+        command = f"cat {self.json_filename} | jq"
+        with open(f"{self.json_filename}", 'r') as file:
+            file_data = file.read()
+            file.close()
+            os.system(command)
            
 #Custom Header
 cus_header = {'Origin':'https://evil.com'}
@@ -39,8 +50,9 @@ try:
     
     # Crafting the Websites 
     
-    website1 = Websites(url, url_headers)
+    website1 = Websites(url, url_headers, "domain.json")
     website1.DumpWebsites_json()
+    website1.beautify_json()
 
 except IndexError: 
    print(f"You have to provide the URL !")
