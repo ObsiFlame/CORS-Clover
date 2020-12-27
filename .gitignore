@@ -1,4 +1,4 @@
 *.json
 logs/*.json
-Banner/__pycache__
-__pycache__
+Banner/__pycache__/*
+__pycache__/

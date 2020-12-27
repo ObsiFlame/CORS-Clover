@@ -26,7 +26,7 @@ class Websites:
             file.close()
 
     def beautify_json(self):
-        command = f"cat {self.json_filename} | jq"
+        command = f"cat {self.json_filename} | jq | tee -a output.json"
         with open(f"{self.json_filename}", 'r') as file:
             file_data = file.read()
             file.close()
