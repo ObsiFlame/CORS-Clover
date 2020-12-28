@@ -5,9 +5,20 @@ import sys
 import os
 import json
 from Banner.info import banner
-# Banner of the Project 
+from Cloverflags.CLIFlags import cliflags
+from Cloverflags.CLIFlags import get_URL, get_FILENAME
 
+# Banner of the Project 
 banner()
+
+# CLI flags 
+cliflags()
+
+# Fetching user data from args
+
+file_name = get_FILENAME()
+url = get_URL()
+
 
 # make add the sites to the list
 
@@ -19,20 +30,19 @@ class Websites:
         self.json_filename = json_filename
     
     def DumpWebsites_json(self):
-       # print(f"{self.domain} -> domain \n\n ")
-       # print(f"{self.headers} -> header \n\n ")
-        with open(f"{self.json_filename}", 'w') as file:
+        with open("raw.json", 'w') as file:
             json.dump(dict(self.headers), file)
             file.close()
 
     def beautify_json(self):
-        command = f"cat {self.json_filename} | jq | tee -a output.json"
-        with open(f"{self.json_filename}", 'r') as file:
-            file_data = file.read()
-            file.close()
-            os.system(command)
+        command = f"cat raw.json | jq | tee -a {self.json_filename}"
+        os.system(command)
+    
+    def clean_up(self):
+        os.remove('raw.json')
+        SystemExit
            
-#Custom Header
+#Custom Header with evil.com
 cus_header = {'Origin':'https://evil.com'}
 
 
@@ -42,17 +52,17 @@ def send_request(url, U_headers):
     return get_request_data
 
 try:
-    url = sys.argv[1]       # Domain Value
     # Here we'll send the request with a custom header of CORS
+    
     url_request_data = send_request(url,cus_header)
     url_headers = url_request_data.headers 
-    # print(url_headers.values)
+        
+    # Enumeration main process is done here
     
-    # Crafting the Websites 
-    
-    website1 = Websites(url, url_headers, "domain.json")
-    website1.DumpWebsites_json()
-    website1.beautify_json()
+    target_url = Websites(url, url_headers, file_name)
+    target_url.DumpWebsites_json()
+    target_url.beautify_json()
+    target_url.clean_up()
 
 except IndexError: 
    print(f"You have to provide the URL !")

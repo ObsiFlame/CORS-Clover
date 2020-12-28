@@ -1,0 +1,2 @@
+rich
+requests>=2.24

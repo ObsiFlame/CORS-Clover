@@ -3,4 +3,5 @@ logs/*.json
 Banner/__pycache__/**
 /__pycache__
 *.pyc
+Cloverflags/__pycache__/**
 

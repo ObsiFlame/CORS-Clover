@@ -14,3 +14,12 @@ Allow-Control-Allow-Origin, Allow-Control-Allow-Methods, Access-Control-Allow-Cr
 - Python 3.8.6  
 - requests 
 - [JQ json processor](https://stedolan.github.io/jq/)
+
+## Running CORS Clover on Mac or Linux
+
+`` git clone https://github.com/DexterLex98/CORS-Clover.git
+    cd CORS-Clover
+    pip3 install -r requirements.txt
+    python3 clover.py -h 
+    python3 clover.py -host http://<target_host_endpoint>
+``

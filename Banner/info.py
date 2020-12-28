@@ -10,7 +10,7 @@ console = Console()
 def banner():
     Author_identity = {
         'Author_name' :"Suraj Das",
-        'Created_Date' :"23-December-2020"
+        'Created_Date' :"28-December-2020"
         }
 
     print(""" 
@@ -23,4 +23,4 @@ def banner():
 
             """)
     console.print("Use the tool for the good of infosec :heart:")
-    console.log("[magenta]=============== Description ================[/magenta]", log_locals=True)
+    console.log("Description",log_locals=True)
