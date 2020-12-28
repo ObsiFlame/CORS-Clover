@@ -17,9 +17,9 @@ Allow-Control-Allow-Origin, Allow-Control-Allow-Methods, Access-Control-Allow-Cr
 
 ## Running CORS Clover on Mac or Linux
 
-`` git clone https://github.com/DexterLex98/CORS-Clover.git
+``` git clone https://github.com/DexterLex98/CORS-Clover.git
     cd CORS-Clover
     pip3 install -r requirements.txt
     python3 clover.py -h 
-    python3 clover.py -host http://<target_host_endpoint>
-``
+    python3 clover.py --url <target_host_endpoint> --output <Y/N>
+```
